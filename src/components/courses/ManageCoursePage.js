@@ -20,7 +20,7 @@ class ManageCoursePage extends React.Component {
     );
   }
 }
-
+// let = sdikd
 
 ManageCoursePage.propTypes ={
   //dispatch:PropTypes.func.isRequired,
