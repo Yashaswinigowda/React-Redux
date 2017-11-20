@@ -34,7 +34,7 @@ class CoursePage extends React.Component {
 CoursePage.propTypes ={
   //dispatch:PropTypes.func.isRequired,
   coursesFromReducer:PropTypes.array.isRequired,
-  actions:PropTypes.object.isRequired,
+  actions:PropTypes.object.isRequired
 };
 
 

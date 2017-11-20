@@ -22,7 +22,7 @@ class ManageCoursePage extends React.Component {
         <div>
             <h1> Manage Courses </h1>
             <CourseForm
-            allAuthors={[]}
+            allAuthors={this.props.authors}
             course={this.state.course}
             errors={this.state.errors}
           />
@@ -33,14 +33,26 @@ class ManageCoursePage extends React.Component {
 
 
 ManageCoursePage.propTypes ={
-  //dispatch:PropTypes.func.isRequired,
+  course:PropTypes.object.isRequired,
+  authors:PropTypes.array.isRequired
 };
 
 
 function mapStateToProps(state){
-  let course = {id: '', watchHref: '', title:'', authorId: '', length:'',category:''};
+ let course = {id: '', watchHref: '', title:'', authorId: '', length:'',category:''};
+
+/* We are customizing the props that we are getting from store
+   bcoz the Dropdown in course form is accepting only key and author name*/
+   const authorsFormattedForDropDown = state.authors.map (author => {
+     return {
+        value : author.id,
+        text :author.firstName + ' ' + author.lastName
+     };
+   });
+
   return{
-    course: course  // state.courses is pointing to reducers state name that is given in index page
+    course: course,  // state.courses is pointing to reducers state name that is given in index page
+    authors : authorsFormattedForDropDown
   };
 }
 
