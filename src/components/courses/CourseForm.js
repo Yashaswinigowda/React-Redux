@@ -1,58 +1,71 @@
 import React, {PropTypes} from 'react';
-import TextInput from 'terra-form/lib/Input';
+import TextInput from './../common/TextInput';
+import SelectInput from './../common/SelectInput';
 
-import SelectInput from 'terra-form/lib/Select';
 
-const CourseForm = ({course, allAuthors , onSave, onChange, loading , errors}) =>{
+
+const CourseForm = ({course, allAuthors , onSave, onChange, loading , errors}) => {
   return(
-  <div>
-        <h1> Manage Course </h1>
+  <form>
 
-        <input type="text"
+        <TextInput
           name="title"
+          label="Title"
           value={course.title}
           onChange ={onChange}
-
+          error ={errors.title}
         />
 
-      //   <SelectInput
-      //    name = "AuthorID"
-      //    value = {course.authorId}
-      //    options ={allAuthors}
-      //    defaultValue="Select Author"
-      //    onChange ={onChange}
-      // />
-      //
-      // <TextInput
-      //   name="Category"
-      //   value={course.category}
-      //   onChange ={onChange}
-      //   required
-      // />
-      //
-      // <TextInput
-      //   name="Length"
-      //   value={course.length}
-      //   onChange ={onChange}
-      //   required
-      // />
+        <SelectInput
+         name = "AuthorID"
+         label = "Author"
+         value = {course.authorId}
+         defaultValue= "Select Author"
+         options ={allAuthors}
+         onChange ={onChange}
+         error ={errors.authorId}
+      />
 
-      // <input type="Submit"
-      //   disabled={loading}
-      //   value={loading ? 'Saving....' : 'Save' }
-      //   className = "btn btn-primary"
-      //   onClick = {onSave}
-      // />
+      <TextInput
+        name="Category"
+        value={course.category}
+        onChange ={onChange}
+        required
+      />
 
-    </div>
+      <TextInput
+        name="category"
+        label="Category"
+        value={course.category}
+        onChange ={onChange}
+        error ={errors.category}
+      />
+
+      <TextInput
+        name="length"
+        label="Length"
+        value={course.length}
+        onChange ={onChange}
+        error ={errors.length}
+      />
+
+      <input
+        type="Submit"
+        disabled={loading}
+        value= {loading ? 'Saving....' : 'Save'}
+        className = "btn btn-primary"
+        onClick = {onSave}
+      />
+
+    </form>
   );
 };
 
-CourseForm.propTypes ={
-  course: PropTypes.object.isRequired,
+CourseForm.propTypes = {
+  course: React.PropTypes.object.isRequired,
   allAuthors: React.PropTypes.array,
-  onSave: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onSave: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
   loading: React.PropTypes.bool,
   errors: React.PropTypes.object
 

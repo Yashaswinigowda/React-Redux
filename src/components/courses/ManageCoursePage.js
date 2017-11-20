@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as courseActions from '../../actions/courseActions'; // refereence to courseAction
-
+import CourseForm from './CourseForm';
 
 import {bindActionCreators} from 'redux';
 
@@ -9,6 +9,11 @@ class ManageCoursePage extends React.Component {
   constructor(props, context)
   {
     super(props,context);
+
+    this.state={
+      course: Object.assign({}, this.props.course),
+      errors: {}
+    };
   }
 
   render(){
@@ -16,11 +21,16 @@ class ManageCoursePage extends React.Component {
     return(
         <div>
             <h1> Manage Courses </h1>
+            <CourseForm
+            allAuthors={[]}
+            course={this.state.course}
+            errors={this.state.errors}
+          />
         </div>
     );
   }
 }
-// let = sdikd
+
 
 ManageCoursePage.propTypes ={
   //dispatch:PropTypes.func.isRequired,
@@ -28,8 +38,9 @@ ManageCoursePage.propTypes ={
 
 
 function mapStateToProps(state){
+  let course = {id: '', watchHref: '', title:'', authorId: '', length:'',category:''};
   return{
-    state: state  // state.courses is pointing to reducers state name that is given in index page
+    course: course  // state.courses is pointing to reducers state name that is given in index page
   };
 }
 
