@@ -10,11 +10,42 @@ export function loadCoursesSucess (courses){
     this will always return dispatch function
     we can also use saga method to handle ASYC calls
 */
+
+export function updateCourseSucess(course)
+{
+   return {type:actionType.UPDATE_COURSE_SUCESS, course};
+}
+
+export function createCourseSucess(course)
+{
+   return {type:actionType.CREATE_COURSE_SUCESS, course};
+}
+
+
+
 export function loadCourses()
 {
   return function (dispatch) {
      return courseApi.getAllCourses().then(courses => {
        dispatch(loadCoursesSucess(courses));
+     }).catch(error => {
+       throw(error);
+     });
+  };
+}
+
+
+/*This action is called once the Save button is clicked to save course
+  In this we are writing a logic to check whether the given course already has an ID
+  if it as ID it updatethe existence once
+  else create the new one
+ */
+
+export function saveCourse(course)
+{
+  return function (dispatch, getState) {
+     return courseApi.saveCourse().then(savedCourses => {
+       course.id ? dispatch(updateCourseSucess(savedCourses)) : dispatch(createCourseSucess(savedCourses));
      }).catch(error => {
        throw(error);
      });
