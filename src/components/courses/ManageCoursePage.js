@@ -29,6 +29,7 @@ class ManageCoursePage extends React.Component {
   saveCourse(event){
     event.preventDefault();
     this.props.actions.saveCourse(this.state.course);
+    this.context.router.push('/courses');   // once the course is saved this will redirect to courses page back
   }
 
   render(){
@@ -57,6 +58,11 @@ ManageCoursePage.propTypes ={
   actions:PropTypes.object.isRequired
 };
 
+// pull in the react router context so router is avalible on this.context.router
+
+ManageCoursePage.contextTypes = {
+  router :PropTypes.object
+};
 
 function mapStateToProps(state, ownProps){
  let course = {id: '', watchHref: '', title:'', authorId: '', length:'',category:''};
