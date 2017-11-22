@@ -18,6 +18,15 @@ class ManageCoursePage extends React.Component {
     this.saveCourse = this.saveCourse.bind(this);
   }
 
+/*To re-render coursev data back on the screen when page is been refreshed
+  this is used to update the local state when the props change */
+componentWillReceiveProps(nextProps){
+  //debugger;
+  if(this.props.course.id != nextProps.course.id){
+    this.setState({course: Object.assign({}, nextProps.course)});
+  }
+}
+
   updateCourseState(event) {
    const field = event.target.name;
    let course = this.state.course;  // inorder to avoid mutating state we do below approach
@@ -64,8 +73,25 @@ ManageCoursePage.contextTypes = {
   router :PropTypes.object
 };
 
+
+/*Getting allcourses and also the course-id that need to be filtered */
+function getCourseById(courses, id){
+    //debugger;
+    const course = courses.filter(course => course.id == id);
+
+    if(course) { return course[0];}   // the filter always return array. And in this case it will always be only one couse with same id.. so returing course[0]
+
+   return null;
+  }
+
 function mapStateToProps(state, ownProps){
- let course = {id: '', watchHref: '', title:'', authorId: '', length:'',category:''};
+
+ const courseId = ownProps.params.id;   // From the path router '/course/:id' - it gives the course-id in the url
+ let course = {id: '', watchHref: '', title:'', authorId: '', length:'',category:''};   // this parameter we use it for new course creation
+
+  if (courseId && state.courses.length > 0){
+    course = getCourseById(state.courses, courseId)
+  }
 
 /* We are customizing the props that we are getting from store
    bcoz the Dropdown in course form is accepting only key and author name*/
