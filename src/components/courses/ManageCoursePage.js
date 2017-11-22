@@ -23,7 +23,7 @@ class ManageCoursePage extends React.Component {
    let course = this.state.course;  // inorder to avoid mutating state we do below approach
   // let course = Object.assign({}, this.props.course);
    course[field] = event.target.value;
-   return this.setState({course:course});
+   return this.setState({course});
   }
 
   saveCourse(event){
