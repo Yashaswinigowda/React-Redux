@@ -5,5 +5,6 @@ insted of hard coding the inital states in reducers we do set initial states her
 
 export default {
   authors : [],
-  courses : []
+  courses : [],
+  ajaxCallsInProgress : 0
 };

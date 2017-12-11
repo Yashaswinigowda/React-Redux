@@ -1,6 +1,8 @@
 // this file contains the Courserelated actions
 import * as actionType from './actionTypes';
 import AuthorApi from '../api/mockAuthorApi';
+import  {beginAjaxCall} from './ajaxStatusActions';
+
 
 export function loadAuthorsSucess (authors){
   return {type:actionType.LOAD_AUTHOR_SUCESS, authors};
@@ -13,6 +15,7 @@ export function loadAuthorsSucess (authors){
 export function loadAuthors()
 {
   return dispatch =>  {
+    dispatch(beginAjaxCall());
      return AuthorApi.getAllAuthors().then(authors => {
        dispatch(loadAuthorsSucess(authors));
      }).catch(error => {

@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
 import TextInput from './../common/TextInput';
 import SelectInput from './../common/SelectInput';
+import {Link} from 'react-router';
 
 
-
-const CourseForm = ({course, allAuthors , onSave, onChange, loading , errors}) => {
+const CourseForm = ({course, allAuthors , onSave, onChange, saving , errors}) => {
   return(
   <form>
 
@@ -35,7 +35,6 @@ const CourseForm = ({course, allAuthors , onSave, onChange, loading , errors}) =
         error ={errors.category}
       />
 
-
       <TextInput
         name="length"
         label="Length"
@@ -44,14 +43,21 @@ const CourseForm = ({course, allAuthors , onSave, onChange, loading , errors}) =
         error ={errors.length}
       />
 
-
       <input
         type="Submit"
-        disabled={loading}
-        value= {loading ? 'Saving....' : 'Save'}
+        disabled={saving}
+        value= {saving ? 'Saving....' : 'Save'}
         className = "btn btn-primary"
         onClick = {onSave}
       />
+
+      <input
+        type="Back"
+        className = "btn btn-primary"
+        value= {saving ? 'Saving....' : 'Back'}
+        onClick = {onSave}
+      />
+
 
     </form>
   );
@@ -62,7 +68,7 @@ CourseForm.propTypes = {
   allAuthors: React.PropTypes.array,
   onSave: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
-  loading: React.PropTypes.bool,
+  saving: React.PropTypes.bool,
   errors: React.PropTypes.object
 
 };
