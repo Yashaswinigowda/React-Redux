@@ -42,7 +42,11 @@ componentWillReceiveProps(nextProps){
     event.preventDefault();
     this.setState({saving:true});  // to convert save button to saving when it is been saving
     this.props.actions.saveCourse(this.state.course)
-    .then(() => this.redirect());
+    .then(() => this.redirect())
+    .catch (error =>{
+      toastr.error (error);
+      this.setState({saving:false});   // to convert saving button to save when saving course is done
+    });
     // this.context.router.push('/courses');   // once the course is saved this will redirect to courses page back
 
   }

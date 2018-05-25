@@ -6,8 +6,8 @@ class Homepage extends React.Component{
   {
     return(
       <div className="jumbotron">
-         <h1> Plural sight administration </h1>
-         <p> This is react redux application Ha Ha Ha </p>
+         <h1> Patient Attendance </h1>
+         <p> This is react redux application </p>
          <Link to ="about" className="btn btn-primary btn-lg"> Learn More </Link>
          <Link to ="about/you" className="btn btn-primary btn-lg"> Learn More button </Link>
       </div>

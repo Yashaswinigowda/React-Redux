@@ -39,7 +39,7 @@ export function loadCourses()
 
 /*This action is called once the Save button is clicked to save course
   In this we are writing a logic to check whether the given course already has an ID
-  if it as ID it updatethe existence once
+  if it has ID it update the existence once
   else create the new one
  */
 
